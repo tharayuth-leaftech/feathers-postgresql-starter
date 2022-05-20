@@ -5,31 +5,21 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const users = sequelizeClient.define('users', {
+  const devices = sequelizeClient.define('devices', {
 
-    id: {
-      type: DataTypes.INTEGER,
+    dID: {
+      type: DataTypes.STRING(20),
       primaryKey: true,
-      autoIncrement: true
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
       unique: true
     },
-    firstName: {
-      type: DataTypes.STRING(63),
-      allowNull: true,
-      unique: false
-    },
-    lastName: {
-      type: DataTypes.STRING(63),
-      allowNull: true,
-      unique: false
-    },
-    password: {
+    dName: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+    },
+    dType: {
+      type: DataTypes.STRING(20),
+      allowNull: true,
+      unique: false
     },
     isActive: {
       type: DataTypes.BOOLEAN,
@@ -45,17 +35,19 @@ module.exports = function (app) {
     }
   });
 
+  devices.removeAttribute("id");
   // eslint-disable-next-line no-unused-vars
-  users.associate = function (models) {
-    // Define associations here
-    // See http://docs.sequelizejs.com/en/latest/docs/associations/
-    users.hasMany(
-      sequelizeClient.models.comments,
+  devices.associate = function (models) {
+    devices.hasMany(
+      sequelizeClient.models.sensors,
       {
-        onDelete: 'CASCADE'
+        foreignKey: "sDeviceID",
+        sourceKey: "dID",
+        onDelete: 'CASCADE',
+        as: 'sensorsData'
       }
     );
   };
 
-  return users;
+  return devices;
 };

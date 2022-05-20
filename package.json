@@ -48,8 +48,9 @@
     "dotenv": "^8.2.0",
     "feathers-sequelize": "^6.1.0",
     "helmet": "^3.22.0",
-    "pg": "^7.18.2",
-    "sequelize": "^5.21.6",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.19.0",
     "serve-favicon": "^2.5.0",
     "winston": "^3.2.1"
   },
@@ -59,6 +60,6 @@
     "eslint": "^6.8.0",
     "mocha": "^6.2.3",
     "nodemon": "^1.19.4",
-    "sequelize-cli": "^5.5.1"
+    "sequelize-cli": "^6"
   }
 }
